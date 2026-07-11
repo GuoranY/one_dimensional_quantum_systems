@@ -9,6 +9,8 @@ A Python project for computationally exploring fundamental models in one-dimensi
 - Probability densities for the first three energy eigenstates
 - Energy levels for the first three states
 - Calculations use natural units with hbar = m = L = 1
+- Finite square well
+- Finite square well potential with adjustable width and barrier height
 
 ## Tools
 
