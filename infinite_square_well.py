@@ -2,25 +2,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 L = 1
-
 x = np.linspace(0, L, 500)
 
-psi = np.sqrt(2 / L) * np.sin(np.pi * x / L)
+for n in [1, 2, 3]:
+    psi = np.sqrt(2 / L) * np.sin(n * np.pi * x / L)
 
-plt.plot(x, psi)
+    plt.plot(x, psi, label=f"n = {n}")
 
 plt.xlabel("x")
 plt.ylabel("psi(x)")
-plt.title("Ground State Wavefunction")
-
+plt.title("Infinite Square Well Wavefunctions")
 plt.grid()
+plt.legend()
 plt.show()
 
-probability = np.abs(psi)**2
 
-plt.plot(x, probability)
+for n in [1, 2, 3]:
+    psi = np.sqrt(2 / L) * np.sin(n * np.pi * x / L)
+    probability = np.abs(psi) ** 2
+
+    plt.plot(x, probability, label=f"n = {n}")
+
 plt.xlabel("x")
 plt.ylabel("|psi(x)|^2")
-plt.title("Probability Density")
+plt.title("Probability Densities")
 plt.grid()
+plt.legend()
 plt.show()
