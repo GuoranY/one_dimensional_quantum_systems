@@ -114,4 +114,10 @@ plt.yscale("log")
 plt.legend()
 plt.grid()
 
+plt.savefig(
+    "figures/finite_well_convergence.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()

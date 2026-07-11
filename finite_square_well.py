@@ -20,6 +20,12 @@ plt.title("Finite Square Well Potential")
 plt.ylim(-2, V0 + 5)
 plt.grid()
 
+plt.savefig(
+    "figures/finite_well_potential.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()
 
 
@@ -77,6 +83,13 @@ plt.ylabel(r"$\psi(x)$")
 plt.title("Bound States in a Finite Square Well")
 plt.grid()
 plt.legend()
+
+plt.savefig(
+    "figures/finite_well_wavefunctions.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()
 
 
@@ -117,4 +130,11 @@ plt.title("Finite Square Well Bound States")
 plt.ylim(-2, V0 + 5)
 plt.grid()
 plt.legend()
+
+plt.savefig(
+    "figures/finite_well_bound_states.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()

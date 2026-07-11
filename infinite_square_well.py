@@ -16,6 +16,13 @@ plt.ylabel(r"$\psi_n(x)$")
 plt.title("Infinite Square Well Wavefunctions")
 plt.grid()
 plt.legend()
+
+plt.savefig(
+    "figures/infinite_well_wavefunctions.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()
 
 
@@ -30,6 +37,13 @@ plt.ylabel(r"$|\psi_n(x)|^2$")
 plt.title("Probability Densities")
 plt.grid()
 plt.legend()
+
+plt.savefig(
+    "figures/infinite_well_probability_density.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()
 
 
@@ -53,4 +67,11 @@ plt.ylabel(r"$E_n$ (natural units)")
 plt.title("Infinite Square Well Energy Levels")
 plt.grid(axis="y")
 plt.legend()
+
+plt.savefig(
+    "figures/infinite_well_energy_levels.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
 plt.show()
