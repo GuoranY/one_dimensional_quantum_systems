@@ -5,14 +5,20 @@ A Python project for computationally exploring fundamental models in one-dimensi
 ## Current Contents
 
 - Infinite square well
-- Ground-state wavefunction
-- Probability density
+- Wavefunctions for the first three energy eigenstates
+- Probability densities for the first three energy eigenstates
 
 ## Tools
 
 - Python
 - NumPy
 - Matplotlib
+
+## Features
+
+- Computes normalized eigenfunctions for n = 1, 2, 3
+- Plots wavefunctions and probability densities
+- Uses an infinite well of width L = 1
 
 ## Status
 
