@@ -55,6 +55,22 @@ Increasing the grid size from 400 to 800 changes both energies by approximately 
 
 ![Finite well convergence test](figures/finite_well_convergence.png)
 
+### Effect of Well Depth
+
+The barrier height \(V_0\) was varied while the well width was kept fixed.
+
+The number of numerical bound states increases as the well becomes deeper:
+
+- \(V_0 = 5\): 1 bound state
+- \(V_0 = 10\): 2 bound states
+- \(V_0 = 20\): 2 bound states
+- \(V_0 = 40\): 3 bound states
+- \(V_0 = 80\): 4 bound states
+
+This demonstrates that deeper finite wells can support more bound states.
+
+![Bound states versus barrier height](figures/bound_states_vs_depth.png)
+
 ## Features
 
 - Computes analytical eigenfunctions and energies for the infinite square well
