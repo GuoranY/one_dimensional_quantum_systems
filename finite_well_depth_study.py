@@ -1,59 +1,92 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from quantum_utils import (
+    solve_schrodinger,
+    find_bound_states
+)
+
+
+# Finite square well parameters
+
 hbar = 1
-m = 1
+mass = 1
 L = 1
 
 num_points = 800
 x = np.linspace(-2, 2, num_points)
-dx = x[1] - x[0]
 
 V0_values = [5, 10, 20, 40, 80]
 
 bound_state_counts = []
 
+
+# Calculate the number of bound states for each barrier height
+
 for V0 in V0_values:
-    V = np.where(np.abs(x) <= L / 2, 0, V0)
 
-    main_diagonal = (
-        np.full(num_points, hbar**2 / (m * dx**2))
-        + V
+    # Finite square well potential:
+    # V(x) = 0 inside the well
+    # V(x) = V0 outside the well
+
+    potential = np.where(
+        np.abs(x) <= L / 2,
+        0,
+        V0
     )
 
-    off_diagonal = np.full(
-        num_points - 1,
-        -hbar**2 / (2 * m * dx**2)
+    energies, wavefunctions = solve_schrodinger(
+        x,
+        potential,
+        hbar=hbar,
+        mass=mass
     )
 
-    H = (
-        np.diag(main_diagonal)
-        + np.diag(off_diagonal, 1)
-        + np.diag(off_diagonal, -1)
+    bound_energies, bound_wavefunctions = find_bound_states(
+        energies,
+        wavefunctions,
+        V0
     )
 
-    energies = np.linalg.eigvalsh(H)
-    bound_energies = energies[energies < V0]
+    number_of_bound_states = len(bound_energies)
 
-    bound_state_counts.append(len(bound_energies))
+    bound_state_counts.append(number_of_bound_states)
 
     print(
         f"V0 = {V0:4}, "
-        f"number of bound states = {len(bound_energies)}"
+        f"number of bound states = {number_of_bound_states}"
     )
 
+
+# Plot the number of bound states against barrier height
+
 plt.figure()
+
+plt.step(
+    V0_values,
+    bound_state_counts,
+    where="mid"
+)
 
 plt.plot(
     V0_values,
     bound_state_counts,
-    "o-"
+    "o"
 )
 
-plt.xlabel("Barrier height V0")
-plt.ylabel("Number of bound states")
+plt.xlabel(r"Barrier Height $V_0$")
+plt.ylabel("Number of Bound States")
 plt.title("Number of Bound States vs Barrier Height")
-plt.yticks(range(min(bound_state_counts), max(bound_state_counts) + 1))
+
+plt.xticks(V0_values)
+
+plt.yticks(
+    range(
+        min(bound_state_counts),
+        max(bound_state_counts) + 1
+    )
+)
+
 plt.grid()
 
 plt.savefig(
