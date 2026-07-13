@@ -1,62 +1,93 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from quantum_utils import (
+    solve_schrodinger,
+    find_bound_states
+)
+
+
+# Physical parameters
+HBAR = 1.0
+MASS = 1.0
+L = 1.0
+V0 = 20.0
+
+# Grid sizes used in the convergence test
+NUM_POINTS_LIST = [65, 129, 257, 513, 1025]
+
 
 def calculate_bound_energies(num_points):
-    # Parameters
-    hbar = 1
-    m = 1
-    L = 1
-    V0 = 20
+    """
+    Calculate the bound-state energies of a finite square well
+    using a grid containing num_points points.
+    """
 
+    # Spatial grid
     x = np.linspace(-2, 2, num_points)
-    dx = x[1] - x[0]
 
-    V = np.where(np.abs(x) <= L / 2, 0, V0)
-
-    main_diagonal = (
-        np.full(num_points, hbar**2 / (m * dx**2))
-        + V
+    # Finite square well potential:
+    # V(x) = 0 inside the well
+    # V(x) = V0 outside the well
+    potential = np.where(
+        np.abs(x) <= L / 2,
+        0.0,
+        V0
     )
 
-    off_diagonal = np.full(
-        num_points - 1,
-        -hbar**2 / (2 * m * dx**2)
+    # Solve the time-independent Schrödinger equation
+    energies, wavefunctions = solve_schrodinger(
+        x,
+        potential,
+        hbar=HBAR,
+        mass=MASS
     )
 
-    H = (
-        np.diag(main_diagonal)
-        + np.diag(off_diagonal, 1)
-        + np.diag(off_diagonal, -1)
+    # Select states whose energies are below the barrier height
+    bound_energies, _ = find_bound_states(
+        energies,
+        wavefunctions,
+        V0
     )
-
-    energies, _ = np.linalg.eigh(H)
-
-    bound_energies = energies[energies < V0]
 
     return bound_energies
 
 
-num_points_list = [50, 100, 200, 400, 800]
-
 ground_state_energies = []
 first_excited_energies = []
 
-for num_points in num_points_list:
-    energies = calculate_bound_energies(num_points)
 
-    ground_state_energies.append(energies[0])
-    first_excited_energies.append(energies[1])
+# Calculate energies for each grid size
+for num_points in NUM_POINTS_LIST:
+    bound_energies = calculate_bound_energies(num_points)
+
+    # Make sure at least two bound states were found
+    if len(bound_energies) < 2:
+        raise RuntimeError(
+            f"Only {len(bound_energies)} bound state(s) found "
+            f"for N = {num_points}. At least two are required."
+        )
+
+    ground_state_energy = bound_energies[0]
+    first_excited_energy = bound_energies[1]
+
+    ground_state_energies.append(ground_state_energy)
+    first_excited_energies.append(first_excited_energy)
 
     print(
         f"N = {num_points:4d}, "
-        f"E0 = {energies[0]:.8f}, "
-        f"E1 = {energies[1]:.8f}"
+        f"E0 = {ground_state_energy:.8f}, "
+        f"E1 = {first_excited_energy:.8f}"
     )
+
+
+# Calculate changes between consecutive grid sizes
+delta_E0_list = []
+delta_E1_list = []
 
 print("\nChanges between consecutive grid sizes:")
 
-for i in range(1, len(num_points_list)):
+for i in range(1, len(NUM_POINTS_LIST)):
     delta_E0 = abs(
         ground_state_energies[i]
         - ground_state_energies[i - 1]
@@ -67,52 +98,47 @@ for i in range(1, len(num_points_list)):
         - first_excited_energies[i - 1]
     )
 
+    delta_E0_list.append(delta_E0)
+    delta_E1_list.append(delta_E1)
+
     print(
-        f"N = {num_points_list[i]:4d}: "
+        f"N = {NUM_POINTS_LIST[i]:4d}: "
         f"|ΔE0| = {delta_E0:.8f}, "
         f"|ΔE1| = {delta_E1:.8f}"
     )
 
-delta_E0_list = []
-delta_E1_list = []
 
-for i in range(1, len(num_points_list)):
-    delta_E0_list.append(
-        abs(
-            ground_state_energies[i]
-            - ground_state_energies[i - 1]
-        )
-    )
-
-    delta_E1_list.append(
-        abs(
-            first_excited_energies[i]
-            - first_excited_energies[i - 1]
-        )
-    )
-
-plt.figure()
+# Plot convergence errors
+plt.figure(figsize=(7, 5))
 
 plt.plot(
-    num_points_list[1:],
+    NUM_POINTS_LIST[1:],
     delta_E0_list,
     "o-",
     label="Ground state"
 )
 
 plt.plot(
-    num_points_list[1:],
+    NUM_POINTS_LIST[1:],
     delta_E1_list,
     "o-",
     label="First excited state"
 )
 
-plt.xlabel("Larger grid size N")
-plt.ylabel("Change in energy")
-plt.title("Grid Convergence Error")
+plt.xlabel("Grid size N")
+plt.ylabel(r"$|E_N - E_{\mathrm{previous}}|$")
+plt.title("Finite Square Well Grid Convergence")
+
+plt.xscale("log", base=2)
 plt.yscale("log")
+
+plt.xticks(
+    NUM_POINTS_LIST[1:],
+    NUM_POINTS_LIST[1:]
+)
+
 plt.legend()
-plt.grid()
+plt.grid(True, which="both")
 
 plt.savefig(
     "figures/finite_well_convergence.png",
