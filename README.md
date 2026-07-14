@@ -76,6 +76,15 @@ $$
 
 ![Infinite square well energy errors](figures/infinite_well_energy_errors.png)
 
+#### Numerical Convergence
+
+The convergence of the finite-difference method was tested by calculating
+the ground-state energy using increasingly fine spatial grids.
+
+As the number of grid points increases, the relative error decreases,
+showing that the numerical energy converges toward the analytical result.
+
+![Infinite square well numerical convergence](figures/infinite_well_convergence.png)
 ### Finite Square Well
 
 The finite square well is solved numerically using the finite-difference method.
