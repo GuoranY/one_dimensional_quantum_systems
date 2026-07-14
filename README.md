@@ -7,13 +7,15 @@ solutions and numerical finite-difference methods.
 
 ### Infinite Square Well
 
-The infinite square well is studied analytically using exact energy eigenfunctions and energy eigenvalues.
+The infinite square well is studied using both analytical solutions and numerical finite-difference methods.
 
 Current calculations include:
 
 - Analytical wavefunctions for the first three energy eigenstates
 - Probability densities for the first three energy eigenstates
 - Energy levels for the first three states
+- Numerical solution using the finite-difference method
+- Comparison between numerical and analytical energy eigenvalues
 - Calculations use natural units with $\hbar = m = L = 1$
 
 #### Wavefunctions
@@ -27,6 +29,38 @@ Current calculations include:
 #### Energy Levels
 
 ![Infinite square well energy levels](figures/infinite_well_energy_levels.png)
+
+### Infinite Square Well Validation
+
+The finite-difference solver was validated by the infinite square well, which has analytical energies known exactly.
+For a well extending from $x = 0$ to $x = L$, the analytical energy eigenvalues are
+
+$$ 
+E_n = \frac{n^2\pi^2\hbar^2}{2mL^2},
+\qquad n = 1, 2, 3, \ldots
+$$ 
+
+The numerical Hamiltonian is constructed on the interior spatial grid, while the boundary conditions
+
+$$
+\psi(0) = \psi(L) = 0
+$$
+
+are imposed by excluding the two boundary points from the numerical calculation. The lowest numerical energy
+eigenvalues are compared with their analytical values using the relative error
+
+$$
+\text{relative error} = \frac{|E_{\text{numerical}}-E_{\text{analytical}}|}
+{E_{\text{analytical}}}.
+$$
+
+The numerical energies closely reproduce the analytical results, with small relative errors for the lowest energy
+states. This validates the shared finite-difference Hamiltonian and Schrödinger-equation solver before they are
+applied to systems without simple analytical solutions.
+
+#### Relative Energy Errors
+
+![Infinite square well energy errors](figures/infinite_well_energy_errors.png)
 
 ### Finite Square Well
 
@@ -99,7 +133,7 @@ This demonstrates that deeper finite wells can support more bound states.
 
 ## Numerical Methods
 
-The finite square well calculations use a central finite-difference approximation for the second derivative:
+The numerical calculations use a central finite-difference approximation for the second derivative:
 
 $$
 \frac{d^2\psi}{dx^2}
@@ -111,10 +145,10 @@ $$
 This produces a Hamiltonian matrix with:
 
 - Kinetic energy and potential energy terms on the main diagonal
-- Finite-difference coupling terms on the first upper and lower diagonal
+- Finite-difference coupling terms on the first upper and lower diagonals
 
 Because the Hamiltonian matrix is real and symmetric, its eigenvalues and eigenvectors are calculated using
-'numpy.linalg.eigh'.
+`numpy.linalg.eigh`.
 
 The numerical eigenfunctions are normalized according to
 
@@ -124,7 +158,7 @@ $$
 
 ## Shared Numerical Utilities
 
-Reusable numerical functions are stored in 'quantum_utils.py'.
+Reusable numerical functions are stored in `quantum_utils.py`.
 
 These utilities include:
 
@@ -141,6 +175,9 @@ physical systems being studied.
 
 - Computes analytical eigenfunctions and energies for the infinite square well
 - Calculates probability densities for analytical wavefunctions
+- Solves the infinite square well numerically using the finite-difference method
+- Validates the solver by comparing numerical solutions with analytical solutions
+- Calculates relative errors between numerical and analytical energies
 - Constructs finite-difference Hamiltonian matrices for the finite square well
 - Solves the time-independent Schrödinger equation numerically
 - Calculates bound-state energies and wavefunctions
@@ -175,6 +212,7 @@ one_dimensional_quantum_systems/
 │   ├── finite_well_convergence.png
 │   ├── finite_well_potential.png
 │   ├── finite_well_wavefunctions.png
+│   ├── infinite_well_energy_errors.png
 │   ├── infinite_well_energy_levels.png
 │   ├── infinite_well_probability_density.png
 │   └── infinite_well_wavefunctions.png
@@ -182,6 +220,7 @@ one_dimensional_quantum_systems/
 ├── finite_well_convergence.py
 ├── finite_well_depth_study.py
 ├── infinite_square_well.py
+├── infinite_well_validation.py
 ├── quantum_utils.py
 ├── .gitignore
 └── README.md
