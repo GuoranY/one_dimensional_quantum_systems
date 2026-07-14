@@ -60,6 +60,20 @@ applied to systems without simple analytical solutions.
 
 #### Relative Energy Errors
 
+The numerical energy eigenvalues are compared with the analytical results
+
+$$
+E_n = \frac{n^2 \pi^2 \hbar^2}{2mL^2}.
+$$
+
+| State \(n\) | Numerical Energy | Analytical Energy | Relative Error |
+|---:|---:|---:|---:|
+| 1 | 4.934786 | 4.934802 | 3.303e-06 |
+| 2 | 19.738948 | 19.739209 | 1.321e-05 |
+| 3 | 44.411900 | 44.413220 | 2.973e-05 |
+| 4 | 78.952663 | 78.956835 | 5.285e-05 |
+| 5 | 123.359868 | 123.370055 | 8.257e-05 |
+
 ![Infinite square well energy errors](figures/infinite_well_energy_errors.png)
 
 ### Finite Square Well

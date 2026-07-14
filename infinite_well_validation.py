@@ -46,16 +46,15 @@ relative_errors = (
     / analytical_energies
 )
 
-print("Infinite square well energy comparison:\n")
+print("\n| State n | Numerical Energy | Analytical Energy | Relative Error |")
+print("|---:|---:|---:|---:|")
 
 for state_index in range(number_of_states):
-    n = state_index + 1
-
     print(
-        f"n = {n}: "
-        f"numerical = {energies[state_index]:.8f}, "
-        f"analytical = {analytical_energies[state_index]:.8f}, "
-        f"relative error = {relative_errors[state_index]:.2e}"
+        f"| {state_index + 1} "
+        f"| {energies[state_index]:.6f} "
+        f"| {analytical_energies[state_index]:.6f} "
+        f"| {relative_errors[state_index]:.3e} |"
     )
 
 import matplotlib.pyplot as plt
