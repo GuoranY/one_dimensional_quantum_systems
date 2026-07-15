@@ -136,6 +136,34 @@ Current calculations include:
 
 ![Finite square well wavefunctions](figures/finite_well_wavefunctions.png)
 
+#### Wavefunction Decay Outside the Well
+
+For a bound state with \(E < V_0\), the wavefunction does not
+vanish immediately at the boundaries of a finite square well.
+Instead, it penetrates into the classically forbidden region and
+decays exponentially.
+
+Outside the well, the decay constant is
+
+$$
+\kappa =
+\frac{\sqrt{2m(V_0-E)}}{\hbar},
+$$
+
+and the wavefunction behaves approximately as
+
+$$
+|\psi(x)| \propto e^{-\kappa |x|}.
+$$
+
+On a logarithmic vertical scale, exponential decay appears as a
+straight line. The nearly linear tails in the figure therefore
+confirm the expected exponential behavior outside the well.
+
+![Finite square well wavefunction decay](figures/finite_well_wavefunction_decay.png)
+
+![Finite square well logarithmic decay](figures/finite_well_wavefunction_decay_log.png)
+
 #### Bound States and Energy Levels
 
 ![Finite square well bound states](figures/finite_well_bound_states.png)
