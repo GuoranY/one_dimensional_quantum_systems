@@ -76,6 +76,25 @@ $$
 
 ![Infinite square well energy errors](figures/infinite_well_energy_errors.png)
 
+#### Wavefunction Comparison
+
+The numerical wavefunctions obtained using the finite-difference method
+are compared with the analytical eigenfunctions
+
+$$
+\psi_n(x)
+=
+\sqrt{\frac{2}{L}}
+\sin\left(\frac{n\pi x}{L}\right).
+$$
+
+The numerical and analytical wavefunctions agree closely for the first
+three energy eigenstates. Since an eigenvector is defined only up to an
+overall sign, the signs of the numerical wavefunctions are adjusted before
+the comparison.
+
+![Infinite square well wavefunction comparison](figures/infinite_well_wavefunction_comparison.png)
+
 #### Numerical Convergence
 
 The convergence of the finite-difference method was tested by calculating
@@ -85,6 +104,7 @@ As the number of grid points increases, the relative error decreases,
 showing that the numerical energy converges toward the analytical result.
 
 ![Infinite square well numerical convergence](figures/infinite_well_convergence.png)
+
 ### Finite Square Well
 
 The finite square well is solved numerically using the finite-difference method.
@@ -92,9 +112,7 @@ The finite square well is solved numerically using the finite-difference method.
 The continuous Hamiltonian operator
 
 $$
-\hat{H}
-=
--\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)
+\hat{H} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)
 $$
 
 is approximated by a symmetric tridiagonal matrix on a uniformly spaced spatial grid. Numerical diagonalization is then
