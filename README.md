@@ -164,6 +164,35 @@ confirm the expected exponential behavior outside the well.
 
 ![Finite square well logarithmic decay](figures/finite_well_wavefunction_decay_log.png)
 
+#### Bound-State Parity
+
+Because the finite square well potential is symmetric about \(x=0\),
+
+$$
+V(-x)=V(x),
+$$
+
+its bound-state wavefunctions have definite parity. Numerical
+wavefunctions were classified by comparing each state with its
+spatially reflected form.
+
+The ground state was found to have even parity,
+
+$$
+\psi(-x)=\psi(x),
+$$
+
+while the first excited state had odd parity,
+
+$$
+\psi(-x)=-\psi(x).
+$$
+
+This agrees with the expected alternating parity structure of
+eigenstates in a symmetric one-dimensional potential.
+
+![Finite square well parity](figures/finite_well_parity.png)
+
 #### Bound States and Energy Levels
 
 ![Finite square well bound states](figures/finite_well_bound_states.png)

@@ -189,3 +189,62 @@ def probability_density(psi: np.ndarray) -> np.ndarray:
     psi = np.asarray(psi)
 
     return np.abs(psi) ** 2
+
+
+def determine_parity(
+    wavefunction: np.ndarray,
+    tolerance: float = 1e-6
+) -> str:
+    """
+    Determine whether a wavefunction has even or odd parity.
+    """
+    wavefunction = np.asarray(
+        wavefunction,
+        dtype=float
+    )
+
+    if wavefunction.ndim != 1:
+        raise ValueError(
+            "wavefunction must be a one-dimensional array."
+        )
+
+    if tolerance <= 0:
+        raise ValueError(
+            "tolerance must be positive."
+        )
+
+    wavefunction_norm = np.linalg.norm(
+        wavefunction
+    )
+
+    if wavefunction_norm == 0:
+        raise ValueError(
+            "wavefunction must not be identically zero."
+        )
+
+    reflected_wavefunction = wavefunction[::-1]
+
+    even_error = (
+        np.linalg.norm(
+            wavefunction - reflected_wavefunction
+        )
+        / wavefunction_norm
+    )
+
+    odd_error = (
+        np.linalg.norm(
+            wavefunction + reflected_wavefunction
+        )
+        / wavefunction_norm
+    )
+
+    if even_error < tolerance:
+        return "even"
+
+    if odd_error < tolerance:
+        return "odd"
+
+    if even_error < odd_error:
+        return "approximately even"
+
+    return "approximately odd"
