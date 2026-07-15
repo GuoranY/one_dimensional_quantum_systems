@@ -82,10 +82,7 @@ The numerical wavefunctions obtained using the finite-difference method
 are compared with the analytical eigenfunctions
 
 $$
-\psi_n(x)
-=
-\sqrt{\frac{2}{L}}
-\sin\left(\frac{n\pi x}{L}\right).
+\psi_n(x) = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi x}{L}\right).
 $$
 
 The numerical and analytical wavefunctions agree closely for the first
