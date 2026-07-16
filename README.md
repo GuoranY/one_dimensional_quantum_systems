@@ -226,6 +226,12 @@ This demonstrates that deeper finite wells can support more bound states.
 
 ![Bound states versus barrier height](figures/bound_states_vs_depth.png)
 
+### Effect of Well Width
+
+The barrier height was fixed at \(V_0 = 20\), while the well width was varied. Wider wells support more bound states because the energy levels decrease as the width increases, allowing more states to lie below the barrier energy.
+
+![Bound states versus well width](figures/bound_states_vs_width.png)
+
 ## Numerical Methods
 
 The numerical calculations use a central finite-difference approximation for the second derivative:
