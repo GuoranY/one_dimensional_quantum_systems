@@ -228,7 +228,8 @@ This demonstrates that deeper finite wells can support more bound states.
 
 #### Effect of Well Width
 
-The barrier height was fixed at \(V_0 = 20\), while the well width was varied. Wider wells support more bound states because the energy levels decrease as the width increases, allowing more states to lie below the barrier energy.
+The barrier height was fixed at $V_0 = 20$, while the well width was varied. Wider wells support more bound states
+because the energy levels decrease as the width increases, allowing more states to lie below the barrier energy.
 
 ![Bound states versus well width](figures/bound_states_vs_width.png)
 
@@ -307,8 +308,8 @@ exactly $n$ nodes.
 
 The states also alternate in parity:
 
-- Even-$n$ states have even parity
-- Odd-$n$ states have odd parity
+- Even $n$ states have even parity
+- Odd $n$ states have odd parity
 
 #### Numerical and Analytical Wavefunction Comparison
 
