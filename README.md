@@ -135,7 +135,7 @@ Current calculations include:
 
 #### Wavefunction Decay Outside the Well
 
-For a bound state with \(E < V_0\), the wavefunction does not
+For a bound state with $E < V_0$, the wavefunction does not
 vanish immediately at the boundaries of a finite square well.
 Instead, it penetrates into the classically forbidden region and
 decays exponentially.
@@ -335,6 +335,46 @@ Because an eigenfunction and its negative represent the same physical state,
 the overall signs of the numerical wavefunctions were adjusted when necessary
 before plotting the comparison.
 
+#### Grid Convergence
+
+Grid convergence was tested on the fixed computational domain
+$x\in[-8,8]$ by increasing the number of spatial grid points.
+
+The relative errors of the first five energy eigenvalues decrease
+systematically as the grid is refined. When the grid spacing is
+approximately halved, the errors decrease by roughly a factor of four,
+indicating second-order convergence. This is consistent with the
+central finite-difference approximation used for the second derivative.
+
+Higher-energy states have slightly larger errors because their
+wavefunctions contain more rapid spatial oscillations and therefore
+require finer resolution.
+
+![Harmonic oscillator grid convergence](figures/ho_grid_convergence.png)
+
+#### Domain Convergence
+
+Domain convergence was tested by increasing the computational
+half-width while keeping the grid spacing fixed at approximately
+$\Delta x=0.02$.
+
+Small computational domains produce substantial boundary-truncation
+errors because the harmonic oscillator wavefunctions have not fully
+decayed at the artificial boundaries. These effects are more pronounced
+for higher-energy states, whose wavefunctions extend farther from the
+origin.
+
+For domain half-widths of approximately $5$ or larger, the numerical
+energies become stable. The relative errors then approach a constant
+plateau, indicating that the domain error has become negligible and
+that the remaining error is dominated by the fixed grid spacing.
+
+Some individual errors are not strictly monotonic because the domain
+truncation error and finite-difference error may partially cancel for
+particular domain sizes.
+
+![Harmonic oscillator domain convergence](figures/ho_domain_convergence.png)
+
 ## Numerical Methods
 
 The numerical calculations use a central finite-difference approximation for the second derivative:
@@ -421,6 +461,8 @@ one_dimensional_quantum_systems/
 │   ├── finite_well_wavefunction_decay_log.png
 │   ├── finite_well_wavefunctions.png
 │   ├── harmonic_oscillator.png
+│   ├── ho_domain_convergence.png
+│   ├── ho_grid_convergence.png
 │   ├── ho_wavefunction_comparison.png
 │   ├── infinite_well_convergence.png
 │   ├── infinite_well_energy_errors.png
@@ -435,6 +477,8 @@ one_dimensional_quantum_systems/
 ├── finite_well_wavefunction.py
 ├── finite_well_width_study.py
 ├── harmonic_oscillator.py
+├── ho_domain_convergence.py
+├── ho_grid_convergence.py
 ├── ho_wavefunction_comparison.py
 ├── infinite_square_well.py
 ├── infinite_well_convergence.py
