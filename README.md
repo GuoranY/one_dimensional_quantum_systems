@@ -30,7 +30,7 @@ Current calculations include:
 
 ![Infinite square well energy levels](figures/infinite_well_energy_levels.png)
 
-### Infinite Square Well Validation
+#### Infinite Square Well Validation
 
 The finite-difference solver was validated by the infinite square well, which has analytical energies known exactly.
 For a well extending from $x = 0$ to $x = L$, the analytical energy eigenvalues are
@@ -66,13 +66,13 @@ $$
 E_n = \frac{n^2 \pi^2 \hbar^2}{2mL^2}.
 $$
 
-| State \(n\) | Numerical Energy | Analytical Energy | Relative Error |
-|---:|---:|---:|---:|
-| 1 | 4.934786 | 4.934802 | 3.303e-06 |
-| 2 | 19.738948 | 19.739209 | 1.321e-05 |
-| 3 | 44.411900 | 44.413220 | 2.973e-05 |
-| 4 | 78.952663 | 78.956835 | 5.285e-05 |
-| 5 | 123.359868 | 123.370055 | 8.257e-05 |
+| State \(n\) | Numerical Energy | Analytical Energy |       Relative Error |
+|---:|---:|---:|---------------------:|
+| 1 | 4.934786 | 4.934802 | $3.303\times10^{-6}$ |
+| 2 | 19.738948 | 19.739209 | $1.321\times10^{-5}$ |
+| 3 | 44.411900 | 44.413220 | $2.973\times10^{-5}$ |
+| 4 | 78.952663 | 78.956835 | $5.285\times10^{-5}$ |
+| 5 | 123.359868 | 123.370055 | $8.257\times10^{-5}$ |
 
 ![Infinite square well energy errors](figures/infinite_well_energy_errors.png)
 
@@ -194,7 +194,7 @@ eigenstates in a symmetric one-dimensional potential.
 
 ![Finite square well bound states](figures/finite_well_bound_states.png)
 
-### Numerical Convergence
+#### Numerical Convergence
 
 A grid-convergence test was performed for the finite square well by increasing the number of spatial grid points.
 
@@ -210,7 +210,7 @@ convergence.
 
 ![Finite well convergence test](figures/finite_well_convergence.png)
 
-### Effect of Well Depth
+#### Effect of Well Depth
 
 The barrier height $V_0$ was varied while the well width was kept fixed.
 
@@ -226,11 +226,113 @@ This demonstrates that deeper finite wells can support more bound states.
 
 ![Bound states versus barrier height](figures/bound_states_vs_depth.png)
 
-### Effect of Well Width
+#### Effect of Well Width
 
 The barrier height was fixed at \(V_0 = 20\), while the well width was varied. Wider wells support more bound states because the energy levels decrease as the width increases, allowing more states to lie below the barrier energy.
 
 ![Bound states versus well width](figures/bound_states_vs_width.png)
+
+### Quantum Harmonic Oscillator
+
+The one-dimensional quantum harmonic oscillator was studied numerically using
+the finite-difference method.
+
+The harmonic oscillator potential is
+
+$$
+V(x) = \frac{1}{2}m\omega^2x^2.
+$$
+
+The calculations use natural units with
+
+$$
+\hbar = m = \omega = 1.
+$$
+
+Under these units, the potential becomes
+
+$$
+V(x) = \frac{1}{2}x^2,
+$$
+
+and the analytical energy eigenvalues are
+
+$$
+E_n = \hbar\omega\left(n+\frac{1}{2}\right) = n+\frac{1}{2},
+$$
+
+where $n=0,1,2,\ldots$.
+
+Current calculations include:
+
+- Numerical solution of the one-dimensional Schrödinger equation
+- Visualization of the harmonic oscillator potential
+- Numerical energy eigenvalues for the first five states
+- Comparison between numerical and analytical energy eigenvalues
+- Visualization of energy levels and shifted wavefunctions
+- Comparison between numerical and analytical wavefunctions
+- Examination of wavefunction nodes and parity
+
+#### Energy Eigenvalues
+
+The numerical energy eigenvalues were compared with the exact analytical
+values for the first five states.
+
+| $n$ | Numerical Energy | Analytical Energy |      Relative Error |
+|----:|---:|---:|--------------------:|
+|   0 | 0.49999549 | 0.50000000 | $9.02\times10^{-6}$ |
+|   1 | 1.49997745 | 1.50000000 | $1.50\times10^{-5}$ |
+|   2 | 2.49994138 | 2.50000000 | $2.34\times10^{-5}$ | 
+|   3 | 3.49988727 | 3.50000000 | $3.22\times10^{-5}$ |
+|   4 | 4.49981512 | 4.50000000 | $4.11\times10^{-5}$ |
+
+The numerical energies agree closely with the analytical results, with
+relative errors of approximately $10^{-5}$. The equally spaced energy levels
+are also correctly reproduced:
+
+$$
+E_{n+1}-E_n=\hbar\omega.
+$$
+
+#### Potential, Energy Levels, and Wavefunctions
+
+The harmonic oscillator potential, the first five numerical energy levels,
+and the corresponding shifted wavefunctions are shown below.
+
+![Quantum harmonic oscillator](figures/harmonic_oscillator.png)
+
+The potential is symmetric about $x=0$. The numerical wavefunctions display
+the expected node structure: the state with quantum number $n$ contains
+exactly $n$ nodes.
+
+The states also alternate in parity:
+
+- Even-$n$ states have even parity
+- Odd-$n$ states have odd parity
+
+#### Numerical and Analytical Wavefunction Comparison
+
+The analytical harmonic oscillator wavefunctions are
+
+$$
+\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}H_n\left(\sqrt{\frac{m\omega}{\hbar}}x\right)
+\exp\left(-\frac{m\omega x^2}{2\hbar}\right),
+$$
+
+where $H_n$ is the physicists' Hermite polynomial.
+
+The numerical and analytical wavefunctions were compared for the first four
+energy eigenstates.
+
+![Harmonic oscillator wavefunction comparison](figures/ho_wavefunction_comparison.png)
+
+The numerical and analytical curves nearly overlap, showing that the
+finite-difference solver accurately reproduces both the energies and shapes of
+the harmonic oscillator eigenstates.
+
+Because an eigenfunction and its negative represent the same physical state,
+the overall signs of the numerical wavefunctions were adjusted when necessary
+before plotting the comparison.
 
 ## Numerical Methods
 
@@ -309,19 +411,34 @@ For simplification, calculations use natural units where appropriate:
 one_dimensional_quantum_systems/
 ├── figures/
 │   ├── bound_states_vs_depth.png
+│   ├── bound_states_vs_width.png
 │   ├── finite_well_bound_states.png
 │   ├── finite_well_convergence.png
+│   ├── finite_well_parity.png
 │   ├── finite_well_potential.png
+│   ├── finite_well_wavefunction_decay.png
+│   ├── finite_well_wavefunction_decay_log.png
 │   ├── finite_well_wavefunctions.png
+│   ├── harmonic_oscillator.png
+│   ├── ho_wavefunction_comparison.png
+│   ├── infinite_well_convergence.png
 │   ├── infinite_well_energy_errors.png
 │   ├── infinite_well_energy_levels.png
 │   ├── infinite_well_probability_density.png
+│   ├── infinite_wavefunction_comparison.png
 │   └── infinite_well_wavefunctions.png
 ├── finite_square_well.py
 ├── finite_well_convergence.py
 ├── finite_well_depth_study.py
+├── finite_well_parity.py
+├── finite_well_wavefunction.py
+├── finite_well_width_study.py
+├── harmonic_oscillator.py
+├── ho_wavefunction_comparison.py
 ├── infinite_square_well.py
+├── infinite_well_convergence.py
 ├── infinite_well_validation.py
+├── infinite_well_wavefunction_comparison.py
 ├── quantum_utils.py
 ├── .gitignore
 └── README.md
