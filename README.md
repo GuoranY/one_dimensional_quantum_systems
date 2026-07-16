@@ -285,6 +285,7 @@ values for the first five states.
 | 2 | 2.49994138 | 2.50000000 | 2.34 × 10⁻⁵ |
 | 3 | 3.49988727 | 3.50000000 | 3.22 × 10⁻⁵ |
 | 4 | 4.49981512 | 4.50000000 | 4.11 × 10⁻⁵ |
+
 The numerical energies agree closely with the analytical results, with
 relative errors of approximately $10^{-5}$. The equally spaced energy levels
 are also correctly reproduced:
