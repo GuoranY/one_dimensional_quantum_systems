@@ -278,14 +278,13 @@ Current calculations include:
 The numerical energy eigenvalues were compared with the exact analytical
 values for the first five states.
 
-| $n$ | Numerical Energy | Analytical Energy |      Relative Error |
-|----:|---:|---:|--------------------:|
-|   0 | 0.49999549 | 0.50000000 | $9.02\times10^{-6}$ |
-|   1 | 1.49997745 | 1.50000000 | $1.50\times10^{-5}$ |
-|   2 | 2.49994138 | 2.50000000 | $2.34\times10^{-5}$ | 
-|   3 | 3.49988727 | 3.50000000 | $3.22\times10^{-5}$ |
-|   4 | 4.49981512 | 4.50000000 | $4.11\times10^{-5}$ |
-
+| n | Numerical Energy | Analytical Energy | Relative Error |
+|---:|---:|---:|---:|
+| 0 | 0.49999549 | 0.50000000 | 9.02 × 10⁻⁶ |
+| 1 | 1.49997745 | 1.50000000 | 1.50 × 10⁻⁵ |
+| 2 | 2.49994138 | 2.50000000 | 2.34 × 10⁻⁵ |
+| 3 | 3.49988727 | 3.50000000 | 3.22 × 10⁻⁵ |
+| 4 | 4.49981512 | 4.50000000 | 4.11 × 10⁻⁵ |
 The numerical energies agree closely with the analytical results, with
 relative errors of approximately $10^{-5}$. The equally spaced energy levels
 are also correctly reproduced:
