@@ -375,6 +375,63 @@ particular domain sizes.
 
 ![Harmonic oscillator domain convergence](figures/ho_domain_convergence.png)
 
+### Quantum Tunneling
+
+Quantum tunneling through a rectangular potential barrier is studied using the analytical transmission coefficient.
+
+The potential is defined as
+
+$$
+V(x) = \begin{cases} 0, & x < 0, \\ V_0, & 0 \leq x \leq a, \\ 0, & x > a, \end{cases}
+$$
+
+where $V_0$ is the barrier height and $a$ is the barrier width.
+
+For particle energies below the barrier height, $E < V_0$, the transmission probability is
+
+$$
+T = \left[1 + \frac{V_0^2 \sinh^2(\kappa a)} {4E(V_0-E)} \right]^{-1},
+$$
+
+where
+
+$$
+\kappa = \frac{\sqrt{2m(V_0-E)}}{\hbar}.
+$$
+
+Although a classical particle cannot cross the barrier when $E < V_0$, the quantum-mechanical transmission probability
+remains nonzero.
+
+For particle energies above the barrier height, $E > V_0$, the transmission probability is
+
+$$
+T = \left[1 + \frac{V_0^2 \sin^2(qa)} {4E(E-V_0)} \right]^{-1},
+$$
+
+where
+
+$$
+q =
+\frac{\sqrt{2m(E-V_0)}}{\hbar}.
+$$
+
+The transmission probability was calculated over a range of particle energies using natural units with
+
+$$
+\hbar = m = 1.
+$$
+
+The calculation shows:
+
+- Nonzero transmission for $E < V_0$, demonstrating quantum tunneling
+- Increasing transmission as the particle energy approaches the barrier height
+- Partial reflection even when $E > V_0$
+- Resonant transmission at specific energies where $T = 1$
+
+#### Transmission Probability
+
+![Quantum tunneling transmission probability](figures/tunneling_transmission_vs_energy.png)
+
 ## Numerical Methods
 
 The numerical calculations use a central finite-difference approximation for the second derivative:
@@ -469,7 +526,8 @@ one_dimensional_quantum_systems/
 │   ├── infinite_well_energy_levels.png
 │   ├── infinite_well_probability_density.png
 │   ├── infinite_wavefunction_comparison.png
-│   └── infinite_well_wavefunctions.png
+│   ├── infinite_well_wavefunctions.png
+│   └── tunneling_transmission_vs_energy.png
 ├── finite_square_well.py
 ├── finite_well_convergence.py
 ├── finite_well_depth_study.py
@@ -484,6 +542,7 @@ one_dimensional_quantum_systems/
 ├── infinite_well_convergence.py
 ├── infinite_well_validation.py
 ├── infinite_well_wavefunction_comparison.py
+├── quantum_tunneling.py
 ├── quantum_utils.py
 ├── .gitignore
 └── README.md

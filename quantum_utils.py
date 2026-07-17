@@ -248,3 +248,113 @@ def determine_parity(
         return "approximately even"
 
     return "approximately odd"
+
+def transmission_probability(
+    energy: float | np.ndarray,
+    barrier_height: float,
+    barrier_width: float,
+    hbar: float = 1.0,
+    mass: float = 1.0
+) -> float | np.ndarray:
+    """
+    Calculate the transmission probability for a rectangular
+    potential barrier.
+    """
+    energy = np.asarray(
+        energy,
+        dtype=float
+    )
+
+    if barrier_height <= 0:
+        raise ValueError(
+            "barrier_height must be positive."
+        )
+
+    if barrier_width <= 0:
+        raise ValueError(
+            "barrier_width must be positive."
+        )
+
+    if hbar <= 0:
+        raise ValueError(
+            "hbar must be positive."
+        )
+
+    if mass <= 0:
+        raise ValueError(
+            "mass must be positive."
+        )
+
+    if np.any(energy <= 0):
+        raise ValueError(
+            "All energy values must be positive."
+        )
+
+    transmission = np.empty_like(
+        energy,
+        dtype=float
+    )
+
+    below_barrier = energy < barrier_height
+    above_barrier = energy > barrier_height
+    at_barrier = np.isclose(
+        energy,
+        barrier_height
+    )
+
+    energy_below = energy[below_barrier]
+
+    kappa = np.sqrt(
+        2
+        * mass
+        * (barrier_height - energy_below)
+    ) / hbar
+
+    transmission[below_barrier] = 1 / (
+        1
+        + (
+            barrier_height**2
+            * np.sinh(kappa * barrier_width)**2
+            / (
+                4
+                * energy_below
+                * (barrier_height - energy_below)
+            )
+        )
+    )
+
+    energy_above = energy[above_barrier]
+
+    q = np.sqrt(
+        2
+        * mass
+        * (energy_above - barrier_height)
+    ) / hbar
+
+    transmission[above_barrier] = 1 / (
+        1
+        + (
+            barrier_height**2
+            * np.sin(q * barrier_width)**2
+            / (
+                4
+                * energy_above
+                * (energy_above - barrier_height)
+            )
+        )
+    )
+
+    transmission[at_barrier] = 1 / (
+        1
+        + (
+            mass
+            * barrier_height
+            * barrier_width**2
+            / (2 * hbar**2)
+        )
+    )
+
+    if transmission.ndim == 0:
+        return float(transmission)
+
+    return transmission
