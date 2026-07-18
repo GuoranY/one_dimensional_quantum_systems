@@ -527,7 +527,9 @@ one_dimensional_quantum_systems/
 │   ├── infinite_well_probability_density.png
 │   ├── infinite_wavefunction_comparison.png
 │   ├── infinite_well_wavefunctions.png
-│   └── tunneling_transmission_vs_energy.png
+│   ├── tunneling_transmission_vs_energy.png
+│   ├── tunneling_width_log_study.png
+│   └── tunneling_width_study.png
 ├── finite_square_well.py
 ├── finite_well_convergence.py
 ├── finite_well_depth_study.py
@@ -545,7 +547,8 @@ one_dimensional_quantum_systems/
 ├── quantum_tunneling.py
 ├── quantum_utils.py
 ├── .gitignore
-└── README.md
+├── README.md
+└── tunneling_width_study.py
 ```
 
 ## Status

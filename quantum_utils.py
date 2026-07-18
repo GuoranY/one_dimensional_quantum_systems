@@ -358,3 +358,54 @@ def transmission_probability(
         return float(transmission)
 
     return transmission
+
+
+def rectangular_barrier_transmission(
+    energy: float,
+    barrier_height: float,
+    barrier_width: float,
+    hbar: float = 1.0,
+    mass: float = 1.0
+) -> float:
+    """
+    Calculate the analytical transmission coefficient for a particle
+    tunneling through a one-dimensional rectangular potential barrier.
+    """
+    if energy <= 0:
+        raise ValueError(
+            "energy must be positive."
+        )
+
+    if barrier_height <= energy:
+        raise ValueError(
+            "barrier_height must be greater than energy."
+        )
+
+    if barrier_width <= 0:
+        raise ValueError(
+            "barrier_width must be positive."
+        )
+
+    if mass <= 0:
+        raise ValueError(
+            "mass must be positive."
+        )
+
+    kappa = np.sqrt(
+        2 * mass * (barrier_height - energy)
+    ) / hbar
+
+    transmission = 1 / (
+        1
+        + (
+            barrier_height**2
+            * np.sinh(kappa * barrier_width)**2
+        )
+        / (
+            4
+            * energy
+            * (barrier_height - energy)
+        )
+    )
+
+    return float(transmission)
