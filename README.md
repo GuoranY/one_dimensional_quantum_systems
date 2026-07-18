@@ -396,7 +396,7 @@ where $V_0$ is the barrier height and $a$ is the barrier width.
 For a particle with energy below the barrier height,
 
 $$
-0<E<V_0,
+0 < E < V_0,
 $$
 
 the wavefunction decays exponentially inside the classically forbidden
