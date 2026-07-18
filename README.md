@@ -3,7 +3,7 @@
 A Python project for computationally exploring fundamental models in one-dimensional quantum mechanics using analytical
 solutions and numerical finite-difference methods.
 
-## Current Contents
+## Physical Systems
 
 ### Infinite Square Well
 
@@ -205,8 +205,9 @@ For the selected well parameters:
 - Ground-state energy: approximately $2.81$
 - First excited-state energy: approximately $10.73$
 
-Increasing the grid points from 400 to 800 changes both energies by approximately $0.2%$, indicating reasonable numerical
-convergence.
+The changes between consecutive grid sizes decrease systematically as the
+grid is refined, demonstrating that both bound-state energies approach
+stable numerical values.
 
 ![Finite well convergence test](figures/finite_well_convergence.png)
 
@@ -642,9 +643,9 @@ physical systems being studied.
 - Investigates the effect of barrier height on transmission probability
 - Uses reusable numerical functions through a shared utility module
 
-## Tools
+## Requirements
 
-- Python
+- Python 3.10 or later
 - NumPy
 - Matplotlib
 
@@ -655,6 +656,27 @@ For simplification, calculations use natural units where appropriate:
 - $\hbar = 1$
 - $m = 1$
 - $L = 1$ for the infinite square well
+
+## How to Run
+
+Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run any study independently from the project directory. For example:
+
+```bash
+python infinite_square_well.py
+python finite_square_well.py
+python harmonic_oscillator.py
+python quantum_tunneling.py
+```
+
+Additional validation, convergence, and parameter-study scripts can also be run independently.
+
+Generated figures are saved in the `figures/` directory.
 
 ## Project Structure
 
@@ -689,7 +711,7 @@ one_dimensional_quantum_systems/
 ├── finite_well_convergence.py
 ├── finite_well_depth_study.py
 ├── finite_well_parity.py
-├── finite_well_wavefunction.py
+├── finite_well_wavefunction_decay.py
 ├── finite_well_width_study.py
 ├── harmonic_oscillator.py
 ├── ho_domain_convergence.py
@@ -701,13 +723,16 @@ one_dimensional_quantum_systems/
 ├── infinite_well_wavefunction_comparison.py
 ├── quantum_tunneling.py
 ├── quantum_utils.py
-├──tunneling_energy_study.py
-├──tunneling_width_study.py
+├── tunneling_energy_study.py
 ├── tunneling_height_study.py
+├── tunneling_width_study.py
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
 
 ## Status
 
-This project is currently under development.
+The main computational studies are complete. All simulation scripts have
+been tested successfully, and the numerical results agree with analytical
+solutions or expected physical behavior.
