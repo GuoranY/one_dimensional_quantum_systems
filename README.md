@@ -316,8 +316,8 @@ The states also alternate in parity:
 The analytical harmonic oscillator wavefunctions are
 
 $$
-\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}H_n\left(\sqrt{\frac{m\omega}{\hbar}}x\right)
-\exp\left(-\frac{m\omega x^2}{2\hbar}\right),
+\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}H_n\left(\sqrt{\frac{m\omega}{\hbar}}
+x\right)\exp\left(-\frac{m\omega x^2}{2\hbar}\right),
 $$
 
 where $H_n$ is the physicists' Hermite polynomial.
@@ -377,35 +377,65 @@ particular domain sizes.
 
 ### Quantum Tunneling
 
-Quantum tunneling through a rectangular potential barrier is studied using the analytical transmission coefficient.
+Quantum tunneling through a one-dimensional rectangular potential barrier
+is studied using the analytical transmission coefficient.
 
 The potential is defined as
 
 $$
-V(x) = \begin{cases} 0, & x < 0, \\ V_0, & 0 \leq x \leq a, \\ 0, & x > a, \end{cases}
+V(x)=
+\begin{cases}
+0, & x<0, \\
+V_0, & 0\leq x\leq a, \\
+0, & x>a,
+\end{cases}
 $$
 
 where $V_0$ is the barrier height and $a$ is the barrier width.
 
-For particle energies below the barrier height, $E < V_0$, the transmission probability is
+For a particle with energy below the barrier height,
 
 $$
-T = \left[1 + \frac{V_0^2 \sinh^2(\kappa a)} {4E(V_0-E)} \right]^{-1},
+0<E<V_0,
 $$
 
-where
+the wavefunction decays exponentially inside the classically forbidden
+region. The decay constant is
 
 $$
-\kappa = \frac{\sqrt{2m(V_0-E)}}{\hbar}.
+\kappa =
+\frac{\sqrt{2m(V_0-E)}}{\hbar}.
 $$
 
-Although a classical particle cannot cross the barrier when $E < V_0$, the quantum-mechanical transmission probability
-remains nonzero.
-
-For particle energies above the barrier height, $E > V_0$, the transmission probability is
+The exact transmission probability is
 
 $$
-T = \left[1 + \frac{V_0^2 \sin^2(qa)} {4E(E-V_0)} \right]^{-1},
+T =
+\left[
+1+
+\frac{V_0^2\sinh^2(\kappa a)}
+{4E(V_0-E)}
+\right]^{-1}.
+$$
+
+Although a classical particle cannot cross the barrier when $E<V_0$,
+the quantum-mechanical transmission probability remains nonzero.
+
+For particle energies above the barrier height,
+
+$$
+E>V_0,
+$$
+
+the transmission probability is
+
+$$
+T =
+\left[
+1+
+\frac{V_0^2\sin^2(qa)}
+{4E(E-V_0)}
+\right]^{-1},
 $$
 
 where
@@ -415,22 +445,135 @@ q =
 \frac{\sqrt{2m(E-V_0)}}{\hbar}.
 $$
 
-The transmission probability was calculated over a range of particle energies using natural units with
+The calculations use natural units with
 
 $$
-\hbar = m = 1.
+\hbar=m=1.
 $$
 
-The calculation shows:
+Current calculations include:
 
-- Nonzero transmission for $E < V_0$, demonstrating quantum tunneling
-- Increasing transmission as the particle energy approaches the barrier height
-- Partial reflection even when $E > V_0$
-- Resonant transmission at specific energies where $T = 1$
+- Transmission probability over a range of incident energies
+- Energy dependence of the tunneling probability below the barrier
+- Barrier-width dependence of the transmission probability
+- Verification of the approximate exponential width dependence
+- Barrier-height dependence of the transmission probability
 
-#### Transmission Probability
+#### Transmission Probability over Energy
+
+The transmission coefficient was calculated over a range containing both
+energies below and above the barrier height.
+
+For $E<V_0$, the nonzero transmission probability demonstrates quantum
+tunneling. For $E>V_0$, the particle may still be partially reflected
+because of its wave nature.
+
+At particular energies above the barrier, resonant transmission occurs and
+the transmission probability reaches unity.
 
 ![Quantum tunneling transmission probability](figures/tunneling_transmission_vs_energy.png)
+
+#### Energy Dependence
+
+The barrier height and barrier width were fixed while the incident particle
+energy was varied below the barrier height.
+
+As the particle energy approaches the barrier height, the transmission
+probability increases rapidly. Even when $E<V_0$, the probability remains
+nonzero.
+
+A logarithmic vertical scale is used because the transmission probability
+spans several orders of magnitude.
+
+![Energy dependence of quantum tunneling](figures/tunneling_energy_dependence.png)
+
+#### Barrier-Width Dependence
+
+The incident energy and barrier height were fixed while the barrier width
+was varied.
+
+For a sufficiently wide barrier, the transmission probability is
+approximately
+
+$$
+T\propto e^{-2\kappa a}.
+$$
+
+Taking the natural logarithm gives
+
+$$
+\ln T\approx -2\kappa a+C.
+$$
+
+Therefore, a plot of $\ln T$ against barrier width should be approximately
+linear, with theoretical slope
+
+$$
+-2\kappa.
+$$
+
+The fitted slope was
+
+$$
+-5.644076,
+$$
+
+while the theoretical slope was
+
+$$
+-5.656854.
+$$
+
+The relative error between the fitted and theoretical slopes was
+
+$$
+2.26\times10^{-3},
+$$
+
+or approximately $0.226\%$.
+
+This close agreement confirms the expected approximate exponential
+dependence of the transmission probability on barrier width.
+
+![Tunneling probability versus barrier width](figures/tunneling_width_study.png)
+
+![Log transmission versus barrier width](figures/tunneling_width_log_study.png)
+
+#### Barrier-Height Dependence
+
+The incident energy and barrier width were fixed while the barrier height
+was varied.
+
+As the barrier height increases, the decay constant
+
+$$
+\kappa =
+\frac{\sqrt{2m(V_0-E)}}{\hbar}
+$$
+
+also increases. The wavefunction therefore decays more rapidly inside the
+barrier, causing the transmission probability to decrease.
+
+For the selected parameters, increasing the barrier height from $V_0=3$
+to $V_0=20$ reduced the transmission probability from approximately
+
+$$
+1.92\times10^{-1}
+$$
+
+to
+
+$$
+8.85\times10^{-6}.
+$$
+
+The transmission probability therefore decreased by more than four orders
+of magnitude.
+
+Because $\kappa$ depends on $\sqrt{V_0-E}$, the transmission probability is
+not expected to be a simple exponential function of $V_0$ itself.
+
+![Barrier-height dependence of quantum tunneling](figures/tunneling_height_dependence.png)
 
 ## Numerical Methods
 
@@ -468,6 +611,7 @@ These utilities include:
 - Numerical solution of the time-independent Schrödinger equation
 - Numerical normalization of eigenfunctions
 - Identification of bound states below a specified energy threshold
+- Calculation of the analytical transmission probability for a rectangular potential barrier
 
 Using shared utility functions reduces duplicated code and keeps the individual simulation scripts focused on the
 physical systems being studied.
@@ -477,16 +621,25 @@ physical systems being studied.
 - Computes analytical eigenfunctions and energies for the infinite square well
 - Calculates probability densities for analytical wavefunctions
 - Solves the infinite square well numerically using the finite-difference method
-- Validates the solver by comparing numerical solutions with analytical solutions
-- Calculates relative errors between numerical and analytical energies
-- Constructs finite-difference Hamiltonian matrices for the finite square well
-- Solves the time-independent Schrödinger equation numerically
-- Calculates bound-state energies and wavefunctions
-- Normalizes numerical wavefunctions using numerical integration
-- Identifies bound states using an energy threshold
-- Plots potentials, wavefunctions, probability densities, and energy levels
-- Performs a grid-convergence test for the numerical calculation
+- Validates the numerical solver using exact analytical solutions
+- Compares numerical and analytical energy eigenvalues
+- Compares numerical and analytical wavefunctions
+- Performs numerical convergence studies
+- Constructs finite-difference Hamiltonian matrices
+- Solves the finite square well numerically
+- Identifies bound states below the external barrier
+- Examines exponential wavefunction decay outside a finite well
+- Classifies bound states according to parity
 - Investigates how well depth affects the number of bound states
+- Investigates how well width affects the number of bound states
+- Solves the quantum harmonic oscillator numerically
+- Compares harmonic oscillator energies and wavefunctions with analytical results
+- Tests grid and domain convergence for the harmonic oscillator
+- Calculates the analytical transmission coefficient for a rectangular barrier
+- Investigates the energy dependence of quantum tunneling
+- Investigates the effect of barrier width on transmission probability
+- Verifies the approximate exponential dependence on barrier width
+- Investigates the effect of barrier height on transmission probability
 - Uses reusable numerical functions through a shared utility module
 
 ## Tools
@@ -525,8 +678,10 @@ one_dimensional_quantum_systems/
 │   ├── infinite_well_energy_errors.png
 │   ├── infinite_well_energy_levels.png
 │   ├── infinite_well_probability_density.png
-│   ├── infinite_wavefunction_comparison.png
+│   ├── infinite_well_wavefunction_comparison.png
 │   ├── infinite_well_wavefunctions.png
+│   ├── tunneling_energy_dependence.png
+│   ├── tunneling_height_dependence.png
 │   ├── tunneling_transmission_vs_energy.png
 │   ├── tunneling_width_log_study.png
 │   └── tunneling_width_study.png
@@ -546,9 +701,11 @@ one_dimensional_quantum_systems/
 ├── infinite_well_wavefunction_comparison.py
 ├── quantum_tunneling.py
 ├── quantum_utils.py
+├──tunneling_energy_study.py
+├──tunneling_width_study.py
+├── tunneling_height_study.py
 ├── .gitignore
-├── README.md
-└── tunneling_width_study.py
+└── README.md
 ```
 
 ## Status

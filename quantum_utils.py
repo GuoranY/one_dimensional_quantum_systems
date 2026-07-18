@@ -409,3 +409,82 @@ def rectangular_barrier_transmission(
     )
 
     return float(transmission)
+
+
+def calculate_transmission_probability(
+    energy: np.ndarray,
+    barrier_height: float,
+    barrier_width: float,
+    hbar: float = 1.0,
+    mass: float = 1.0
+) -> np.ndarray:
+    """
+    Calculate the transmission probability for a particle
+    incident on a one-dimensional rectangular potential barrier.
+    """
+    energy = np.asarray(
+        energy,
+        dtype=float
+    )
+
+    if barrier_height <= 0:
+        raise ValueError(
+            "barrier_height must be positive."
+        )
+
+    if barrier_width <= 0:
+        raise ValueError(
+            "barrier_width must be positive."
+        )
+
+    if hbar <= 0:
+        raise ValueError(
+            "hbar must be positive."
+        )
+
+    if mass <= 0:
+        raise ValueError(
+            "mass must be positive."
+        )
+
+    if np.any(energy <= 0):
+        raise ValueError(
+            "All energy values must be positive."
+        )
+
+    if np.any(energy >= barrier_height):
+        raise ValueError(
+            "This function requires energy < barrier_height."
+        )
+
+    decay_constant = (
+        np.sqrt(
+            2.0
+            * mass
+            * (barrier_height - energy)
+        )
+        / hbar
+    )
+
+    denominator = (
+        1.0
+        + (
+            barrier_height**2
+            * np.sinh(
+                decay_constant
+                * barrier_width
+            )**2
+            / (
+                4.0
+                * energy
+                * (barrier_height - energy)
+            )
+        )
+    )
+
+    transmission_probability = (
+        1.0
+        / denominator
+    )
+
+    return transmission_probability
